@@ -32,9 +32,9 @@ func fileSize(file os.FileInfo) string {
 	if file.IsDir() {
 		return ""
 	} else if file.Size() <= 0 {
-		return "(empty)"
+		return " (empty)"
 	} else {
-		return "(" + fmt.Sprint(file.Size()) + "b)"
+		return " (" + fmt.Sprint(file.Size()) + "b)"
 	}
 }
 
@@ -68,7 +68,7 @@ func getTree(path, result, tab string, printFiles bool) string {
 			line += tab + "├───"
 		}
 
-		result += line + file.Name() + " " + fileSize(file) + "\n"
+		result += line + file.Name() + fileSize(file) + "\n"
 		if file.IsDir() {
 			newPath := filepath.Join(path, file.Name())
 			result = getTree(newPath, result, tab+getTab(index, len(sortFiles)-1), printFiles)
